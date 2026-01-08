@@ -1,0 +1,72 @@
+<div class="quiz-page">
+  <div class="header">
+    <h2>🧩 Create Quiz</h2>
+    <p>Design engaging quizzes to test student knowledge.</p>
+  </div>
+
+  <div class="quiz-container">
+    <!-- Quiz Info -->
+    <div class="quiz-info">
+      <div class="form-group">
+        <label>📘 Subject Name</label>
+        <input type="text" [(ngModel)]="quiz.subject" placeholder="Enter subject name" />
+      </div>
+
+      <div class="form-group">
+        <label>🧾 Quiz Title</label>
+        <input type="text" [(ngModel)]="quiz.title" placeholder="Enter quiz title" />
+      </div>
+
+      <div class="form-group">
+        <label>⏱️ Duration (minutes)</label>
+        <input type="number" [(ngModel)]="quiz.durationMinutes" placeholder="Enter duration" />
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- Questions -->
+    <h3 class="section-title">📄 Questions</h3>
+
+    <div *ngFor="let question of quiz.questions; let i = index" class="question-card">
+      <div class="question-header">
+        <h4>Question {{ i + 1 }}</h4>
+        <button class="btn delete" (click)="removeQuestion(i)">🗑️ Delete</button>
+      </div>
+
+      <textarea [(ngModel)]="question.text" placeholder="Enter question text"></textarea>
+
+      <div class="options">
+        <h6>Options</h6>
+
+        <div *ngFor="let option of question.options; let j = index" class="option-row">
+          <input
+            type="text"
+            [(ngModel)]="option.text"
+            placeholder="Option {{ j + 1 }}"
+          />
+          <label class="correct">
+            <input type="radio" name="q{{ i }}" [checked]="option.correct" (change)="setCorrectOption(i, j)" />
+            ✅ Correct
+          </label>
+          <button class="btn small delete-option" (click)="removeOption(i, j)">✖</button>
+        </div>
+
+        <button class="btn add-option" (click)="addOption(i)">➕ Add Option</button>
+      </div>
+
+      <button class="btn confirm" (click)="confirmQuestion(i)">✅ Confirm Question</button>
+    </div>
+
+    <div class="add-question">
+      <button class="btn add-question-btn" (click)="addQuestion()">➕ Add Question</button>
+    </div>
+
+    <div class="footer-buttons">
+      <button class="btn submit" (click)="createQuiz()">✅ Create Quiz</button>
+      <button class="btn back" (click)="backToDashboard()">↩️ Back to Dashboard</button>
+    </div>
+
+    <p *ngIf="serverMessage" class="server-message">{{ serverMessage }}</p>
+  </div>
+</div>

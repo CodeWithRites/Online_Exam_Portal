@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+
+<!-- 🏠 Header Section -->
+<div class="top-bar">
+  <h2 class="page-title">🎓 Available Exams</h2>
+  <button class="btn-dashboard" (click)="goToStudentDashboard()">
+    🏠 Student Dashboard
+  </button>
+</div>
+
+<!-- 📋 Exam Container -->
+<div class="exam-container">
+  <div *ngIf="loading" class="loading">⏳ Loading available exams...</div>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <div *ngIf="!loading && exams.length > 0" class="exam-list">
+    <div
+      *ngFor="let exam of exams"
+      class="exam-card"
+      [class.attempted]="isExamAttempted(exam.id)"
+    >
+      <h3>{{ exam.title }}</h3>
+      <p class="description">
+        {{ exam.description || 'No description available.' }}
+      </p>
+
+      <div class="exam-info">
+        <span>🕒 Duration: {{ exam.durationMinutes }} min</span>
+        <span>📘 Questions: {{ exam.questions?.length || 0 }}</span>
+      </div>
+
+      <!-- ✅ Conditional Buttons -->
+      <button
+        *ngIf="!isExamAttempted(exam.id)"
+        class="btn-start"
+        (click)="startExam(exam.id)"
+      >
+        ▶ Start Exam
+      </button>
+
+      <button
+        *ngIf="isExamAttempted(exam.id)"
+        class="btn-view"
+        (click)="viewPerformance(exam.id)"
+      >
+        📊 View Performance
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && exams.length === 0 && !errorMessage" class="empty">
+    No exams available at the moment.
+  </div>
+</div>

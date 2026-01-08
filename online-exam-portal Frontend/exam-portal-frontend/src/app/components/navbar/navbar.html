@@ -1,0 +1,39 @@
+<nav class="navbar">
+  <!-- Left Logo -->
+  <div class="navbar-left">
+    <h2 routerLink="/" class="navbar-logo">🎓 Online Exam Portal</h2>
+  </div>
+
+  <!-- Center Links -->
+  <div class="navbar-center">
+    <!-- 👩‍🏫 Teacher Links -->
+    <ng-container *ngIf="auth.getUserRole() === 'TEACHER'">
+      <a routerLink="/teacher-dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/teacher/create-exam" routerLinkActive="active">Create Exam</a>
+      <a routerLink="/teacher/manage-exams" routerLinkActive="active">Manage Exams</a>
+      <a routerLink="/teacher/evaluate" routerLinkActive="active">Evaluation</a>
+      <a routerLink="/teacher/view-student-marks" routerLinkActive="active">Student Marks</a>
+    </ng-container>
+
+    <!-- 🎓 Student Links -->
+    <ng-container *ngIf="auth.getUserRole() === 'STUDENT'">
+      <a routerLink="/student-dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/student/give-exam" routerLinkActive="active">Give Exam</a>
+      <a routerLink="/student/give-quiz" routerLinkActive="active">Give Quiz</a>
+      <a routerLink="/student/view-pyq" routerLinkActive="active">Previous Papers</a>
+      <a routerLink="/student/performance" routerLinkActive="active">Performance</a>
+    </ng-container>
+
+    <!-- ⚙️ Admin Links -->
+    <ng-container *ngIf="auth.getUserRole() === 'ADMIN'">
+      <a routerLink="/admin-dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/admin/manage-pyq" routerLinkActive="active">Manage PYQ</a>
+    </ng-container>
+  </div>
+
+  <!-- Right Side: Welcome & Logout -->
+  <div class="navbar-right">
+    <span class="welcome-text">👋 Welcome, {{ auth.getUsername() || 'User' }}</span>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>

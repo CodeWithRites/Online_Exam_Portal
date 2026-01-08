@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<div class="admin-container">
+  <h2>🛠 Admin Dashboard</h2>
+
+  <div class="cards">
+    <div class="card" (click)="goToUploadPyq()" role="button" tabindex="0">
+      <div class="icon">📂</div>
+      <h3>Upload PYQ</h3>
+      <p>Upload previous year question PDFs for students to download.</p>
+      <button class="card-btn">Go to Upload</button>
+    </div>
+
+    <div class="card" (click)="goToManagePyq()" role="button" tabindex="0">
+      <div class="icon">🗂️</div>
+      <h3>Manage PYQ</h3>
+      <p>View, download or delete uploaded PYQs.</p>
+      <button class="card-btn">Manage PYQs</button>
+    </div>
+  </div>
+</div>

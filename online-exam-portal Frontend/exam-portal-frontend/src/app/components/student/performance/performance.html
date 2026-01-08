@@ -1,0 +1,51 @@
+<!-- 🏠 Top Header -->
+<div class="top-bar">
+  <h2 class="page-title">📊 Your Exam Performance</h2>
+  <button class="btn-dashboard" (click)="goToDashboard()">🏠 Student Dashboard</button>
+</div>
+
+<!-- 📈 Performance Section -->
+<div class="performance-wrapper" *ngIf="!loading; else loadingTpl">
+  <div class="header-info">
+    <p class="last-update">
+      🔄 Auto-refresh active — <span>Last updated:</span>
+      <strong>{{ lastUpdated | date:'mediumTime' }}</strong>
+    </p>
+  </div>
+
+  <!-- ⚠ Error or Empty -->
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="performances.length === 0 && !error" class="no-data">
+    You have no evaluated exams or quizzes yet.
+  </div>
+
+  <!-- 📊 Performance Table -->
+  <div *ngIf="performances.length > 0" class="performance-card">
+    <table class="performance-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Exam / Quiz Title</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Marks (Obtained / Total)</th>
+          <th>Teacher Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of performances; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ p.examTitle }}</td>
+          <td>{{ p.type }}</td>
+          <td><span [class]="getStatusClass(p)">{{ getStatus(p) }}</span></td>
+          <td>{{ p.marksDisplay || (p.marksObtained + '/' + (p.totalMarks || 10)) }}</td>
+          <td>{{ p.comment || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">⏳ Loading your performance...</div>
+</ng-template>

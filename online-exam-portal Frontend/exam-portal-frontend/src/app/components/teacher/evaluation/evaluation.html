@@ -1,0 +1,49 @@
+<div class="evaluation-wrapper">
+  <!-- Header with Dashboard Button -->
+  <div class="header-row">
+    <h2>🧾 Submissions for Evaluation</h2>
+    <button class="dashboard-btn" (click)="goToTeacherDashboard()">🏠 Teacher Dashboard</button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">Loading submissions...</div>
+
+  <!-- No Data -->
+  <div *ngIf="!loading && submissions.length === 0" class="no-data">
+    No submissions found.
+  </div>
+
+  <!-- Table -->
+  <table *ngIf="!loading && submissions.length > 0" class="eval-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Student</th>
+        <th>Exam / Quiz</th>
+        <th>Status</th>
+        <th>Marks (Obtained / Total)</th>
+        <th>Submitted On</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of submissions; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ s.studentName || 'Unknown' }}</td>
+        <td>{{ s.examTitle || s.quizTitle || '—' }}</td>
+        <td>
+          <span [class.evaluated]="s.evaluated" [class.pending]="!s.evaluated">
+            {{ s.evaluated ? 'Evaluated' : 'Pending' }}
+          </span>
+        </td>
+        <td>{{ s.marksDisplay || (s.marksObtained + ' / ' + s.totalMarks) }}</td>
+        <td>{{ s.submittedAt ? (s.submittedAt | date: 'short') : '—' }}</td>
+        <td>
+          <button class="edit-btn" (click)="viewSubmission(s.id)">
+            {{ s.evaluated ? '✏️ Edit Marks' : '🧮 Assign Marks' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

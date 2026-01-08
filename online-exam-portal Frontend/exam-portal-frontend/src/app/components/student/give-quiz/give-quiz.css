@@ -1,0 +1,223 @@
+/* 🌟 Overall Layout */
+.quiz-container,
+.quiz-attempt,
+.quiz-results {
+  text-align: center;
+  padding: 30px;
+  animation: fadeIn 0.4s ease-in-out;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 🏠 Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #e3f2fd;
+  border-bottom: 2px solid #bbdefb;
+}
+
+.page-title {
+  color: #1565c0;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-dashboard {
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-dashboard:hover {
+  background: #0d47a1;
+  transform: translateY(-2px);
+}
+
+/* 📋 Quiz Cards */
+.quiz-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.quiz-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ▶ Start Quiz Button */
+.btn-start {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.btn-start:hover {
+  background: #0d47a1;
+}
+
+/* 🕒 Timer & Progress */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.timer-badge {
+  background: #ffebee;
+  color: #d32f2f;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(211, 47, 47, 0.3);
+}
+
+.progress-bar {
+  background: #e3f2fd;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+  margin: 10px 0 20px;
+}
+
+.progress {
+  background: #1565c0;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* 🧠 Question Card */
+.question-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  margin: 0 auto;
+  max-width: 700px;
+  text-align: left;
+}
+
+.option {
+  display: block;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  background: #f9f9f9;
+}
+
+.option:hover {
+  background: #e3f2fd;
+}
+
+.option.selected {
+  background: #c8e6c9;
+  border-left: 5px solid #2e7d32;
+}
+
+/* 🔄 Navigation Buttons */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+  max-width: 700px;
+}
+
+.btn-nav {
+  background: #e0e0e0;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-nav:hover {
+  background: #bdbdbd;
+}
+
+/* ✅ Submit Button */
+.btn-submit {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  background: #1b5e20;
+}
+
+/* ✅ Results Section */
+.correct {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.wrong {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .btn-dashboard {
+    width: 100%;
+  }
+
+  .quiz-list {
+    flex-direction: column;
+    align-items: center;
+  }
+}

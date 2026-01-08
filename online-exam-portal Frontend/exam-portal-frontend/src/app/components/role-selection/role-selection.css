@@ -1,0 +1,173 @@
+/* ==== BACKGROUND & LAYOUT ==== */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top left, #6a11cb, #2575fc);
+  overflow: hidden;
+}
+
+.background {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+}
+
+/* ==== FLOATING ANIMATED SHAPES ==== */
+.floating-shapes .shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+  animation: float 10s infinite ease-in-out alternate;
+}
+
+.shape1 {
+  width: 250px;
+  height: 250px;
+  background: #ff6ec4;
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.shape2 {
+  width: 300px;
+  height: 300px;
+  background: #7873f5;
+  bottom: 10%;
+  right: 10%;
+  animation-delay: 3s;
+}
+
+.shape3 {
+  width: 200px;
+  height: 200px;
+  background: #42e695;
+  top: 60%;
+  left: 60%;
+  animation-delay: 5s;
+}
+
+.shape4 {
+  width: 150px;
+  height: 150px;
+  background: #ffb347;
+  bottom: 15%;
+  left: 25%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-40px) translateX(20px);
+  }
+}
+
+/* ==== GLASS CARD ==== */
+.glass-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 60px 100px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.title span {
+  color: #4facfe;
+  background: linear-gradient(to right, #43e97b, #38f9d7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* ==== ROLE BUTTONS ==== */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.role-btn {
+  border: none;
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  border-radius: 40px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.teacher {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+}
+
+.student {
+  background: linear-gradient(45deg, #ff6a88, #ff99ac);
+}
+
+.admin {
+  background: linear-gradient(45deg, #f7971e, #ffd200);
+  color: #222;
+}
+
+.role-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+
+.role-btn:active {
+  transform: scale(1.02);
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 40px 30px;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .role-btn {
+    width: 80%;
+  }
+}

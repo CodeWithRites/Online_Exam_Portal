@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+
+<!-- 🏠 Top Header -->
+<div class="top-bar">
+  <h2 class="page-title">📘 View Previous Year Questions (PYQs)</h2>
+  <button class="btn-dashboard" (click)="goToDashboard()">🏠 Student Dashboard</button>
+</div>
+
+<!-- 📂 PYQ Container -->
+<div class="pyq-container">
+  <div *ngIf="isLoading" class="loading">Loading PYQs...</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && pyqs.length > 0" class="pyq-list">
+    <div *ngFor="let pyq of pyqs" class="pyq-card">
+      <div class="pyq-info">
+        <h3>{{ pyq.subject | titlecase }}</h3>
+        <p><b>Year:</b> {{ pyq.year }}</p>
+      </div>
+      <button class="download-btn" (click)="downloadPyq(pyq.fileName)">⬇️ Download</button>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && pyqs.length === 0" class="empty">
+    No PYQs available yet.
+  </div>
+</div>

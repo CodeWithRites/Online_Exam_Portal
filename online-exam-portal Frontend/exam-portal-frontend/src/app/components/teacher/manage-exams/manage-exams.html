@@ -1,0 +1,92 @@
+<div class="manage-page">
+  <div class="card">
+    <!-- Header Section -->
+    <div class="header-row">
+      <h2 class="title">🧾 Manage Exams & Quizzes</h2>
+      <button class="dashboard-btn" (click)="goToTeacherDashboard()">🏠 Dashboard</button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button [class.active]="activeTab === 'exams'" (click)="switchTab('exams')">
+        🧮 Exams
+      </button>
+      <button [class.active]="activeTab === 'quizzes'" (click)="switchTab('quizzes')">
+        🧩 Quizzes
+      </button>
+
+      <button *ngIf="activeTab === 'exams'" class="create-btn" (click)="createExam()">
+        ➕ Create Exam
+      </button>
+
+      <button *ngIf="activeTab === 'quizzes'" class="create-btn" (click)="createQuiz()">
+        ➕ Create Quiz
+      </button>
+    </div>
+
+    <!-- Message -->
+    <div *ngIf="serverMessage" class="message">{{ serverMessage }}</div>
+
+    <!-- Exams Table -->
+    <div *ngIf="activeTab === 'exams'" class="table-container">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Questions</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of exams; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ exam.title }}</td>
+            <td>{{ exam.description }}</td>
+            <td>{{ exam.durationMinutes }} min</td>
+            <td>{{ exam.questions?.length || 0 }}</td>
+            <td>
+              <button class="btn view" (click)="router.navigate(['/teacher/view-exam', exam.id])">
+                👁 View
+              </button>
+              <button class="btn delete" (click)="deleteExam(exam.id)">🗑 Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Quizzes Table -->
+    <div *ngIf="activeTab === 'quizzes'" class="table-container">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Questions</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quiz of quizzes; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ quiz.title }}</td>
+            <td>{{ quiz.description }}</td>
+            <td>{{ quiz.durationMinutes }} min</td>
+            <td>{{ quiz.questions?.length || 0 }}</td>
+            <td>
+              <button class="btn view" (click)="router.navigate(['/teacher/view-quiz', quiz.id])">
+                👁 View
+              </button>
+              <button class="btn delete" (click)="deleteQuiz(quiz.id)">🗑 Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <h2>📂 Upload Previous Year Question (PYQ)</h2>
+
+  <div class="card">
+    <form (ngSubmit)="onUpload()">
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" [(ngModel)]="subject" name="subject" placeholder="Enter subject name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Year</label>
+        <input type="text" [(ngModel)]="year" name="year" placeholder="Enter exam year" required>
+      </div>
+
+      <div class="form-group">
+        <label>Upload PDF</label>
+        <input type="file" accept="application/pdf" (change)="onFileChange($event)">
+      </div>
+
+      <button type="submit" [disabled]="uploadInProgress">Upload</button>
+    </form>
+
+    <p class="status" [ngClass]="{'success': message.includes('✅'), 'error': message.includes('❌')}">
+      {{ message }}
+    </p>
+  </div>
+</div>

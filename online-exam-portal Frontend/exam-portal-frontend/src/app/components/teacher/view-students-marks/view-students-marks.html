@@ -1,0 +1,46 @@
+<div class="marks-container" *ngIf="!loading; else loadingTpl">
+  <!-- Header Row -->
+  <div class="header-row">
+    <h2>🎓 Student Marks Overview</h2>
+    <button class="dashboard-btn" (click)="goToTeacherDashboard()">🏠 Teacher Dashboard</button>
+  </div>
+
+  <!-- No Data Message -->
+  <div *ngIf="marksList.length === 0" class="no-data">
+    No evaluated results found yet.
+  </div>
+
+  <!-- Marks Table -->
+  <table *ngIf="marksList.length > 0" class="marks-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Student Name</th>
+        <th>Exam / Quiz</th>
+        <th>Type</th>
+        <th>Marks (Obtained / Total)</th>
+        <th>Status</th>
+        <th>Teacher Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of marksList; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ record.studentName || 'Unknown' }}</td>
+        <td>{{ record.examTitle || 'N/A' }}</td>
+        <td>{{ record.type || 'Exam' }}</td>
+        <td>{{ record.marksDisplay || (record.marksObtained + ' / ' + record.totalMarks) }}</td>
+        <td>
+          <span [class]="getStatusClass(record.status)">
+            {{ getStatus(record.status) }}
+          </span>
+        </td>
+        <td>{{ record.comment || '-' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading student marks...</div>
+</ng-template>

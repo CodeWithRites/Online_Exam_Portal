@@ -1,0 +1,38 @@
+<div class="view-quiz-page" *ngIf="!loading && quiz; else loadingTemplate">
+  <div class="quiz-card">
+    <h2 class="quiz-title">🧩 {{ quiz.title }}</h2>
+    <p class="quiz-desc">{{ quiz.description }}</p>
+    <p class="quiz-meta">⏱ Duration: {{ quiz.durationMinutes }} minutes</p>
+
+    <hr />
+
+    <div *ngIf="quiz.questions?.length > 0; else noQuestions" class="questions">
+      <div *ngFor="let question of quiz.questions; let i = index" class="question-card">
+        <h3 class="q-text">Q{{ i + 1 }}. {{ question.questionText }}</h3>
+
+        <ul class="options">
+          <li *ngFor="let option of question.options" [class.correct]="option.correct">
+            <span class="option-text">{{ option.text }}</span>
+            <span class="badge" *ngIf="option.correct">✅ Correct</span>
+          </li>
+        </ul>
+
+        <p class="marks">Marks: {{ question.marks }}</p>
+      </div>
+    </div>
+
+    <ng-template #noQuestions>
+      <p class="no-data">⚠️ No questions found in this quiz.</p>
+    </ng-template>
+
+    <button class="back-btn" (click)="goBack()">⬅ Back to Manage Page</button>
+  </div>
+</div>
+
+<!-- 🕒 Loading Template -->
+<ng-template #loadingTemplate>
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading quiz details...</p>
+  </div>
+</ng-template>

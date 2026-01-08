@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+
+<!-- Header with Dashboard Button -->
+<div class="top-bar">
+  <h2 class="page-title">🧠 Take a Quiz</h2>
+  <button class="btn-dashboard" (click)="goBack()">🏠 Student Dashboard</button>
+</div>
+
+<!-- 1️⃣ Quiz Selection -->
+<div class="quiz-container" *ngIf="!selectedQuiz">
+  <p class="subtitle">Choose a quiz and test your knowledge!</p>
+
+  <div class="quiz-list">
+    <div *ngFor="let quiz of quizzes" class="quiz-card">
+      <h3>{{ quiz.title }}</h3>
+      <p>{{ quiz.description || 'No description available.' }}</p>
+      <p><b>Duration:</b> {{ quiz.durationMinutes }} mins</p>
+      <button class="btn-start" (click)="startQuiz(quiz)">▶ Start Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- 2️⃣ Quiz Attempt -->
+<div *ngIf="selectedQuiz && !quizCompleted" class="quiz-attempt">
+  <div class="quiz-header">
+    <h2 class="quiz-title">{{ selectedQuiz.title }}</h2>
+    <div class="timer-badge">⏱ {{ formatTime() }}</div>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress" [style.width.%]="progressPercent()"></div>
+  </div>
+
+  <div class="question-card">
+    <h4>Q{{ currentQuestionIndex + 1 }}. {{ selectedQuiz.questions[currentQuestionIndex]?.questionText }}</h4>
+
+    <div class="options">
+      <label
+        *ngFor="let opt of selectedQuiz.questions[currentQuestionIndex]?.options"
+        class="option"
+        [class.selected]="answers[selectedQuiz.questions[currentQuestionIndex]?.id]?.text === opt.text"
+      >
+        <input
+          type="radio"
+          name="q{{ currentQuestionIndex }}"
+          [checked]="answers[selectedQuiz.questions[currentQuestionIndex]?.id]?.text === opt.text"
+          (change)="selectAnswer(selectedQuiz.questions[currentQuestionIndex]?.id, opt)"
+        />
+        {{ opt.text }}
+      </label>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0" class="btn-nav">← Prev</button>
+    <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === selectedQuiz.questions.length - 1" class="btn-nav">Next →</button>
+  </div>
+
+  <button class="btn-submit" (click)="submitQuiz()" [disabled]="submitting">
+    {{ submitting ? 'Submitting...' : 'Submit Quiz' }}
+  </button>
+</div>
+
+<!-- 3️⃣ Result Section -->
+<div *ngIf="showResults" class="quiz-results">
+  <h2>📊 Quiz Results</h2>
+
+  <div *ngFor="let r of resultSummary; let i = index" class="result-item">
+    <p><b>Q{{ i + 1 }}:</b> {{ r.questionText }}</p>
+    <p>
+      🧑‍🎓 Your Answer:
+      <span [ngClass]="{ correct: r.isCorrect, wrong: !r.isCorrect }">
+        {{ r.selectedOption || 'Not Attempted' }}
+      </span>
+    </p>
+    <p>✅ Correct Answer: {{ r.correctOption }}</p>
+    <hr />
+  </div>
+</div>

@@ -1,0 +1,107 @@
+@import '../../../../styles.css';
+
+.container {
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 40px;
+  background: linear-gradient(135deg, #e8f5e9, #f9fff7);
+  min-height: 100vh;
+}
+
+h2 {
+  color: #1b5e20;
+  font-size: 26px;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.pyq-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.pyq-card {
+  background: #ffffff;
+  border-radius: 14px;
+  width: 260px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #c8e6c9;
+  text-align: left;
+}
+
+.pyq-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  color: #1b5e20;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.file {
+  color: #666;
+  font-size: 13px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+.actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.download {
+  background: linear-gradient(to right, #1976d2, #42a5f5);
+  color: white;
+}
+
+.download:hover {
+  background: linear-gradient(to right, #0d47a1, #1976d2);
+  transform: scale(1.05);
+}
+
+.delete {
+  background: linear-gradient(to right, #e53935, #ef5350);
+  color: white;
+}
+
+.delete:hover {
+  background: linear-gradient(to right, #b71c1c, #d32f2f);
+  transform: scale(1.05);
+}
+
+.success {
+  color: #2e7d32;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.error {
+  color: #c62828;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.empty {
+  color: #777;
+  margin-top: 25px;
+  font-style: italic;
+}

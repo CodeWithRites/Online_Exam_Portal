@@ -1,0 +1,58 @@
+<div class="page" #pdfContent *ngIf="!loading && exam; else loadingTpl">
+  <div class="header">
+    <h2>📘 {{ exam.title }}</h2>
+  </div>
+
+  <div class="info">
+    <p><strong>Subject:</strong> {{ exam.subject }}</p>
+    <p><strong>Duration:</strong> {{ exam.durationMinutes }} minutes</p>
+    <p><strong>Description:</strong> {{ exam.description }}</p>
+  </div>
+
+  <hr />
+
+  <!-- ✅ LONG QUESTIONS -->
+  <div *ngIf="longQuestions.length > 0" class="section">
+    <div class="section-header long-header">
+      <h3>🟢 Long Answer Questions ({{ longQuestions.length }})</h3>
+      <span><strong>Total Marks:</strong> {{ totalLongMarks }}</span>
+    </div>
+    <div *ngFor="let q of longQuestions; let i = index" class="question-card">
+      <p><strong>Q{{ i + 1 }}.</strong> {{ q.questionText }}</p>
+      <p class="meta">Marks: {{ q.marks }}</p>
+    </div>
+  </div>
+
+  <!-- ✅ SHORT QUESTIONS -->
+  <div *ngIf="shortQuestions.length > 0" class="section">
+    <div class="section-header short-header">
+      <h3>🔵 Short Answer Questions ({{ shortQuestions.length }})</h3>
+      <span><strong>Total Marks:</strong> {{ totalShortMarks }}</span>
+    </div>
+    <div *ngFor="let q of shortQuestions; let i = index" class="question-card">
+      <p><strong>Q{{ i + 1 }}.</strong> {{ q.questionText }}</p>
+      <p class="meta">Marks: {{ q.marks }}</p>
+    </div>
+  </div>
+
+  <!-- ✅ OTHER QUESTIONS (no type) -->
+  <div *ngIf="otherQuestions.length > 0" class="section">
+    <div class="section-header">
+      <h3>🟠 All Questions ({{ otherQuestions.length }})</h3>
+      <span><strong>Total Marks:</strong> {{ totalMarks }}</span>
+    </div>
+    <div *ngFor="let q of otherQuestions; let i = index" class="question-card">
+      <p><strong>Q{{ i + 1 }}.</strong> {{ q.questionText }}</p>
+      <p class="meta">Marks: {{ q.marks }}</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="btn-pdf" (click)="downloadPDF()">📄 Download PDF</button>
+    <button class="btn-back" (click)="backToManage()">↩️ Back</button>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading exam details...</div>
+</ng-template>

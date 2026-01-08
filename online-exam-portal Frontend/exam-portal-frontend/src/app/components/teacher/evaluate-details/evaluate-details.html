@@ -1,0 +1,49 @@
+<div class="eval-details" *ngIf="!loading; else loadingTpl">
+  <h2>Evaluate Submission</h2>
+
+  <div class="meta">
+    <strong>Student:</strong> {{ submission.studentName || submission.userName }}<br />
+    <strong>Exam:</strong> {{ submission.examTitle || submission.quizTitle }}<br />
+    <strong>Submitted:</strong> {{ submission.submittedAt | date:'short' }}
+  </div>
+
+  <div class="answers" *ngFor="let a of submission.answers; index as i">
+    <div class="qa-card">
+      <h3>Q{{ i + 1 }}. {{ a.questionText || a.question_text || 'Question' }}
+        <span class="marks">({{ a.marks ?? a.maxMarks ?? a.questionMarks ?? '—' }} marks)</span>
+      </h3>
+
+      <div class="student-answer">
+        <strong>Answer:</strong>
+        <div *ngIf="a.textAnswer || a.text_answer; else noText">
+          <pre>{{ a.textAnswer || a.text_answer }}</pre>
+        </div>
+        <ng-template #noText><em>No text answer</em></ng-template>
+
+        <div *ngIf="a.filePath || a.file_path">
+          <strong>Attachment:</strong>
+          <a [href]="fileUrl(a.filePath || a.file_path)" target="_blank">Download / Open</a>
+        </div>
+      </div>
+
+      <div class="marks-row">
+        <label>Marks awarded</label>
+        <input type="number" [(ngModel)]="marksMap[a.id]" min="0" [max]="a.marks ?? 999" />
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-box">
+    <label>Teacher comments</label>
+    <textarea [(ngModel)]="comment" rows="4"></textarea>
+  </div>
+
+  <div class="actions">
+    <button (click)="submitEvaluation()">Submit Evaluation</button>
+    <button class="cancel" routerLink="/teacher/evaluate">Cancel</button>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading submission...</div>
+</ng-template>

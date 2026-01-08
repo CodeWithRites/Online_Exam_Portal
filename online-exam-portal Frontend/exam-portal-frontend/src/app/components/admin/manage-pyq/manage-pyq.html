@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <h2>📘 Manage Previous Year Questions (PYQs)</h2>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="message" class="success">{{ message }}</div>
+
+  <div *ngIf="pyqs.length === 0" class="empty">No PYQs available yet.</div>
+
+  <div class="pyq-grid">
+    <div class="pyq-card" *ngFor="let pyq of pyqs">
+      <h3>{{ pyq.subject }}</h3>
+      <p><strong>Year:</strong> {{ pyq.year }}</p>
+      <p class="file">{{ pyq.fileName }}</p>
+
+      <div class="actions">
+        <button class="download" (click)="download(pyq.fileName)">⬇️ Download</button>
+        <button class="delete" (click)="openDeleteDialog(pyq)">🗑️ Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

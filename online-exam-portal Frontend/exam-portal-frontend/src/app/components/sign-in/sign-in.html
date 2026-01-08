@@ -1,0 +1,28 @@
+<div class="auth-container">
+  <mat-card>
+    <h2>🔐 Sign In</h2>
+    <p class="role-label">Role: {{ selectedRole | titlecase }}</p>
+
+    <form [formGroup]="signInForm" (ngSubmit)="onLogin()">
+      <!-- Username -->
+<mat-form-field appearance="outline" class="w-full">
+  <mat-label>Username</mat-label>
+  <input matInput formControlName="username" placeholder="Enter your username">
+</mat-form-field>
+
+<!-- Password -->
+<mat-form-field appearance="outline" class="w-full">
+  <mat-label>Password</mat-label>
+  <input matInput type="password" formControlName="password" placeholder="Enter your password">
+</mat-form-field>
+
+
+      <button mat-raised-button color="primary" class="w-100">Sign In</button>
+    </form>
+
+    <p class="switch-text">
+      Don’t have an account?
+      <a (click)="goToSignUp()">Sign Up</a>
+    </p>
+  </mat-card>
+</div>

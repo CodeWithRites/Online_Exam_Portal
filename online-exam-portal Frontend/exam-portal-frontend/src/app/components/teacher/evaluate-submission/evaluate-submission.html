@@ -1,0 +1,67 @@
+<div class="evaluation-container" *ngIf="!loading && submission; else loadingTpl">
+  <div class="header">
+    <h2>🧾 Evaluate Submission</h2>
+    <div class="meta-info">
+      <p><strong>👤 Student:</strong> {{ submission.studentName }}</p>
+      <p><strong>🧪 Exam:</strong> {{ submission.examTitle }}</p>
+      <p><strong>📅 Submitted:</strong> {{ submission.submittedAt | date: 'short' }}</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Answer Cards -->
+  <div *ngFor="let a of submission.answers; index as i" class="answer-card">
+    <h3>Q{{ i + 1 }}. {{ a.questionText }}</h3>
+    <p class="marks-info">({{ a.marks }} marks)</p>
+
+    <div class="student-answer">
+      <strong>Answer:</strong>
+      <pre>{{ a.textAnswer || '(No answer provided)' }}</pre>
+
+      <div *ngIf="a.filePath" class="file-link">
+        <strong>📎 File:</strong>
+        <a [href]="a.filePath" target="_blank" rel="noopener noreferrer">Open Submission</a>
+      </div>
+    </div>
+
+    <div class="marks-entry">
+      <label>Marks Awarded:</label>
+      <input
+        type="number"
+        [(ngModel)]="a.marksAwarded"
+        (input)="calculateTotal()"
+        min="0"
+        [max]="a.marks"
+      />
+      <span>/ {{ a.marks }}</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Total Marks & Comments -->
+  <div class="total-section">
+    <h3>🏆 Marks Obtained: <span>{{ totalMarks }}</span> / {{ maxMarks }}</h3>
+
+    <label>💬 Teacher Comments</label>
+    <textarea
+      [(ngModel)]="comment"
+      rows="4"
+      placeholder="Write your feedback here..."
+    ></textarea>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions">
+    <button class="btn submit" (click)="submitEvaluation()">💾 Submit Evaluation</button>
+    <button class="btn delete" (click)="deleteSubmission()">🗑 Delete Submission</button>
+    <button class="btn cancel" (click)="goBack()">↩️ Cancel</button>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">
+    <p>⏳ Loading submission details...</p>
+  </div>
+</ng-template>

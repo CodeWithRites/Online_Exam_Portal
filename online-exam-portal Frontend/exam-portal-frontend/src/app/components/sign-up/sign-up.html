@@ -1,0 +1,35 @@
+<div class="auth-container">
+  <mat-card>
+    <h2>📝 Sign Up</h2>
+    <p class="role-label">Role: {{ selectedRole | titlecase }}</p>
+
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" placeholder="Enter username" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Enter email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>University ID</mat-label>
+        <input matInput formControlName="universityId" placeholder="Enter University ID" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter password" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="w-100">Sign Up</button>
+    </form>
+
+    <p class="switch-text">
+      Already have an account?
+      <a (click)="router.navigate(['/sign-in'], { queryParams: { role: selectedRole } })">Sign In</a>
+    </p>
+  </mat-card>
+</div>

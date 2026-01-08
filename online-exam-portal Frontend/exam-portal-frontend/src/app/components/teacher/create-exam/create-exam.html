@@ -1,0 +1,84 @@
+<div class="page">
+  <div class="header">
+    <h2>📝 Create New Exam</h2>
+    <p>Fill out exam details and add your questions below.</p>
+  </div>
+
+  <div class="exam-card" [formGroup]="form">
+    <!-- 🧾 Exam Information -->
+    <div class="form-grid">
+      <div class="form-section">
+        <label>📘 Subject Name</label>
+        <input type="text" formControlName="subject" placeholder="Enter subject name" />
+      </div>
+
+      <div class="form-section">
+        <label>📄 Exam Title</label>
+        <input type="text" formControlName="title" placeholder="Enter exam title" />
+      </div>
+
+      <div class="form-section">
+        <label>⏱️ Duration (minutes)</label>
+        <input type="number" formControlName="durationMinutes" min="1" />
+      </div>
+
+      <div class="form-section full-width">
+        <label>🗒️ Exam Description</label>
+        <textarea formControlName="description" rows="2" placeholder="Brief exam description"></textarea>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="divider" />
+
+    <!-- 🧩 Questions Section -->
+    <div class="questions-section">
+      <h3>🧮 Questions</h3>
+
+      <div formArrayName="questions">
+        <div *ngFor="let q of questions.controls; let i = index" [formGroupName]="i" class="question-card">
+          <div class="question-header">
+            <h4>Question {{ i + 1 }}</h4>
+            <div class="question-buttons">
+              <button *ngIf="!q.get('confirmed')?.value" class="btn confirm" (click)="confirmQuestion(i)">✅ Confirm</button>
+              <button *ngIf="q.get('confirmed')?.value" class="btn edit" (click)="editQuestion(i)">✏️ Edit</button>
+              <button class="btn delete" (click)="removeQuestion(i)">🗑️ Delete</button>
+            </div>
+          </div>
+
+          <div class="question-body">
+            <div class="question-row">
+              <div class="field">
+                <label>Type</label>
+                <select formControlName="type">
+                  <option value="Long">Long</option>
+                  <option value="Short">Short</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Marks</label>
+                <input type="number" formControlName="marks" min="1" />
+              </div>
+            </div>
+
+            <div class="question-text">
+              <label>Question Text</label>
+              <textarea formControlName="text" rows="3" placeholder="Write your question here..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn add" (click)="addQuestion()">➕ Add Question</button>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons">
+      <button class="btn submit" (click)="submit()" [disabled]="submitting">✅ Create Exam</button>
+      <button class="btn back" (click)="backToDashboard()">↩️ Back to Dashboard</button>
+    </div>
+
+    <p *ngIf="serverMessage" class="server-message">{{ serverMessage }}</p>
+  </div>
+</div>

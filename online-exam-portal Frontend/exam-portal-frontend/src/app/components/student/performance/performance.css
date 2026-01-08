@@ -1,0 +1,161 @@
+@import '../../../../styles.css';
+
+/* 🌟 Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: linear-gradient(90deg, #1976d2, #64b5f6);
+  color: white;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 5px 20px rgba(25, 118, 210, 0.3);
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-dashboard {
+  background: #fff;
+  color: #1565c0;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-dashboard:hover {
+  background: #e3f2fd;
+  transform: translateY(-2px);
+}
+
+/* 📈 Performance Wrapper */
+.performance-wrapper {
+  background: linear-gradient(180deg, #f5f9ff 0%, #eaf2ff 100%);
+  padding: 50px 20px;
+  min-height: 100vh;
+  animation: fadeIn 0.5s ease-in-out;
+  text-align: center;
+}
+
+/* 📋 Header Info */
+.header-info {
+  margin-bottom: 20px;
+}
+
+.last-update {
+  font-size: 14px;
+  color: #444;
+  font-style: italic;
+}
+
+.last-update span {
+  color: #1976d2;
+}
+
+/* 💠 Performance Card */
+.performance-card {
+  max-width: 950px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.performance-card:hover {
+  box-shadow: 0 12px 30px rgba(25, 118, 210, 0.15);
+}
+
+/* 📊 Table */
+.performance-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.performance-table th,
+.performance-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e3e3e3;
+  text-align: left;
+}
+
+.performance-table th {
+  background: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 700;
+}
+
+.performance-table tr:hover {
+  background: #f9fbff;
+  transition: 0.2s;
+}
+
+/* ✅ Status Styles */
+.evaluated {
+  color: #2e7d32;
+  font-weight: 700;
+}
+
+.pending {
+  color: #ef6c00;
+  font-weight: 700;
+}
+
+/* ⚠ No Data / Error / Loading */
+.no-data,
+.error,
+.loading {
+  color: #444;
+  font-size: 16px;
+  margin-top: 40px;
+  font-weight: 500;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+/* ✨ Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .btn-dashboard {
+    width: 100%;
+  }
+
+  .performance-card {
+    padding: 20px;
+  }
+
+  .performance-table th,
+  .performance-table td {
+    font-size: 13px;
+    padding: 10px;
+  }
+}

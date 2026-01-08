@@ -1,0 +1,113 @@
+<ng-template #loadingTemplate>
+  <div class="loading-screen">
+    <div class="spinner"></div>
+    <p>Loading your exam...</p>
+  </div>
+</ng-template>
+
+<div class="exam-wrapper" *ngIf="!loading; else loadingTemplate">
+  <!-- 🧭 Header -->
+  <header class="exam-header">
+    <div class="header-left">
+      <h1>{{ exam?.title }}</h1>
+      <p class="exam-desc">{{ exam?.description }}</p>
+      <p class="autosave-status">💾 Auto-save active — progress is saved every 1 minute</p>
+    </div>
+
+    <div
+      class="timer-display"
+      [class.warning]="remainingSeconds <= warningTime"
+      [class.danger]="remainingSeconds <= 60"
+    >
+      ⏰ {{ formattedTime }}
+    </div>
+  </header>
+
+  <!-- 📋 Exam Body -->
+  <main class="exam-body" *ngIf="!submitted; else submittedSection">
+    <div class="question-card">
+      <div class="question-header">
+        <h3>Question {{ currentQuestionIndex + 1 }} of {{ questions.length }}</h3>
+        <span class="marks-pill">{{ questions[currentQuestionIndex]?.marks }} marks</span>
+      </div>
+
+      <p class="question-text">{{ questions[currentQuestionIndex]?.questionText }}</p>
+
+      <div class="answer-box">
+        <textarea
+          placeholder="Type your answer here..."
+          rows="6"
+          [value]="answers[questions[currentQuestionIndex].id]?.textAnswer || ''"
+          (input)="updateAnswer(questions[currentQuestionIndex].id, $event)"
+        ></textarea>
+
+        <!-- 📎 Upload Section -->
+        <div class="upload-section">
+          <label class="upload-btn">
+            📎 Attach File (optional)
+            <input
+              type="file"
+              (change)="uploadFile($event, questions[currentQuestionIndex].id)"
+            />
+          </label>
+
+          <!-- ✅ Show Uploaded File -->
+          <div
+            *ngIf="answers[questions[currentQuestionIndex].id]?.filePath"
+            class="file-display"
+          >
+            ✅ Uploaded:
+            <span class="file-name">
+              {{ getFileName(answers[questions[currentQuestionIndex].id]?.filePath) }}
+            </span>
+            <a
+              class="view-link"
+              [href]="getFileUrl(answers[questions[currentQuestionIndex].id]?.filePath)"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              🔗 View Attachment
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🔘 Navigation -->
+      <div class="navigation-buttons">
+        <button
+          class="nav-btn prev"
+          (click)="previousQuestion()"
+          [disabled]="currentQuestionIndex === 0"
+        >
+          ← Previous
+        </button>
+
+        <button
+          class="nav-btn next"
+          (click)="nextQuestion()"
+          [disabled]="currentQuestionIndex === questions.length - 1"
+        >
+          Next →
+        </button>
+
+        <button class="submit-btn" (click)="submitExam()">✅ Submit Exam</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 🎉 Submitted Section -->
+  <ng-template #submittedSection>
+    <div class="submitted-container">
+      <h2>🎉 Exam Submitted!</h2>
+      <p>Your responses have been successfully recorded.</p>
+      <button (click)="router.navigate(['/student-dashboard'])">
+        🏠 Return to Dashboard
+      </button>
+    </div>
+  </ng-template>
+
+  <!-- ⚠️ Toast Message -->
+  <div id="toast" class="toast hidden">
+    ⚠️ Please stay on the exam screen.
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+
+<div class="dashboard-wrapper">
+  <!-- ✨ Welcome Section -->
+  <div class="header">
+    <h2>🎓 Welcome, <span>{{ studentName }}</span></h2>
+    <p>Access everything you need for your exams, quizzes, and performance insights.</p>
+  </div>
+
+  <!-- 💠 Dashboard Cards -->
+  <div class="card-container">
+    <!-- 1️⃣ Give Exam -->
+    <div class="card" (click)="navigate('give-exam')">
+      <div class="icon">📄</div>
+      <h3>Give Exam</h3>
+      <p>Attempt exams by typing answers or uploading your answer copy (PDF).</p>
+      <button class="action-btn">Start Exam</button>
+    </div>
+
+    <!-- 2️⃣ Give Quiz -->
+    <div class="card" (click)="navigate('give-quiz')">
+      <div class="icon">🎯</div>
+      <h3>Give Quiz</h3>
+      <p>Participate in exciting quizzes assigned by your teachers.</p>
+      <button class="action-btn">Start Quiz</button>
+    </div>
+
+    <!-- 3️⃣ View PYQ -->
+    <div class="card" (click)="navigate('view-pyq')">
+      <div class="icon">📘</div>
+      <h3>View PYQ</h3>
+      <p>Access and download previous year question papers for all subjects.</p>
+      <button class="action-btn">View Papers</button>
+    </div>
+
+    <!-- 4️⃣ Performance Dashboard -->
+    <div class="card" (click)="navigate('performance')">
+      <div class="icon">📊</div>
+      <h3>Performance Dashboard</h3>
+      <p>Track your marks, progress, and performance analytics in real time.</p>
+      <button class="action-btn">View Performance</button>
+    </div>
+  </div>
+</div>

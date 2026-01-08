@@ -1,0 +1,38 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f5f7fa;
+}
+
+mat-card {
+  width: 400px;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.role-label {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 100%;
+}
+
+.switch-text {
+  margin-top: 10px;
+}
+
+a {
+  color: #1976d2;
+  cursor: pointer;
+  text-decoration: none;
+}

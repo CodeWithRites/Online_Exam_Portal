@@ -1,0 +1,127 @@
+.evaluation-wrapper {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* 🧾 Header */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #1a237e;
+  text-align: center;
+  font-size: 24px;
+  margin: 0;
+}
+
+/* 🏠 Dashboard Button */
+.dashboard-btn {
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dashboard-btn:hover {
+  background: #0d47a1;
+  transform: translateY(-2px);
+}
+
+/* 📋 Table */
+.eval-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.eval-table th {
+  background-color: #1565c0;
+  color: white;
+  font-weight: 600;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.eval-table td {
+  text-align: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.eval-table tr:nth-child(even) {
+  background-color: #f5f7fa;
+}
+
+.evaluated {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.pending {
+  color: #ef6c00;
+  font-weight: 600;
+}
+
+/* 🧮 Buttons */
+.edit-btn {
+  background: #1565c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.edit-btn:hover {
+  background: #0d47a1;
+}
+
+/* ⏳ States */
+.loading,
+.no-data {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  padding: 20px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .evaluation-wrapper {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .header-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dashboard-btn {
+    width: 100%;
+  }
+
+  .eval-table th,
+  .eval-table td {
+    font-size: 13px;
+    padding: 8px;
+  }
+}

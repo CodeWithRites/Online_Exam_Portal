@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div class="dashboard-wrapper">
+  <!-- 🌟 Header Section -->
+  <div class="dashboard-header">
+    <h2>👩‍🏫 Welcome, <span>{{ teacherName }}</span></h2>
+    <p>Manage your exams, quizzes, and students — all from one smart control panel.</p>
+  </div>
+
+  <!-- 💠 Dashboard Grid -->
+  <div class="cards-grid">
+    <!-- 1️⃣ Create Exam -->
+    <mat-card class="card" (click)="go('teacher/create-exam')">
+      <div class="icon-circle"><mat-icon>assignment</mat-icon></div>
+      <h3>Create Exam</h3>
+      <p>Create descriptive or long-answer exams for your students with ease.</p>
+      <button mat-raised-button color="primary" class="card-btn">Start Creating</button>
+    </mat-card>
+
+    <!-- 2️⃣ Manage Exams -->
+    <mat-card class="card" (click)="go('teacher/manage-exams')">
+      <div class="icon-circle"><mat-icon>edit_note</mat-icon></div>
+      <h3>Manage Exams</h3>
+      <p>View, edit, and manage all your created exams efficiently.</p>
+      <button mat-raised-button color="primary" class="card-btn">Manage</button>
+    </mat-card>
+
+    <!-- 3️⃣ Create Quiz -->
+    <mat-card class="card" (click)="go('teacher/create-quiz')">
+      <div class="icon-circle"><mat-icon>quiz</mat-icon></div>
+      <h3>Create Quiz</h3>
+      <p>Build short, auto-evaluated quizzes for quick student testing.</p>
+      <button mat-raised-button color="primary" class="card-btn">Create Quiz</button>
+    </mat-card>
+
+    <!-- 4️⃣ Evaluate -->
+    <mat-card class="card" (click)="go('teacher/evaluate')">
+      <div class="icon-circle"><mat-icon>grading</mat-icon></div>
+      <h3>Evaluation</h3>
+      <p>Review student submissions, grade answers, and give personalized feedback.</p>
+      <button mat-raised-button color="primary" class="card-btn">Start Evaluating</button>
+    </mat-card>
+
+    <!-- 5️⃣ View Student Marks -->
+    <mat-card class="card" (click)="go('teacher/view-student-marks')">
+      <div class="icon-circle"><mat-icon>insights</mat-icon></div>
+      <h3>View Student Marks</h3>
+      <p>Track student performance trends and analyze their progress over time.</p>
+      <button mat-raised-button color="primary" class="card-btn">View Marks</button>
+    </mat-card>
+  </div>
+</div>
